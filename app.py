@@ -7,9 +7,13 @@ class nav:
         self.href = href
         self.caption = caption
 
-@app.route('/')
-def stl():
+@app.route('/show')
+def show():
 	return render_template('viewer.html')
+
+@app.route('/')
+def search():
+  return render_template('search.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
