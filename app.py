@@ -9,7 +9,8 @@ class nav:
 
 @app.route('/')
 def stl():
-	return render_template('viewer.html')
+	return render_template('show.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
