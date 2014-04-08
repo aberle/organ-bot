@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Organ Bot</title>
+        <meta charset="utf-8">
+        <link href="/fonts.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            * {
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+            .container {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            body {
+                background: #ECF0F1;
+                text-align: center;
+                font-family: 'franklin_gothic_demiregular';
+            }
+            img {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            label, input {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            input {
+                padding: 10px;
+                margin-bottom: 20px;
+                height: 50px;
+                -webkit-appearance: none;
+                border: 0;
+                background: white;
+                border-radius: 3px;
+                border: 2px solid #979797;
+                font-family: 'franklin_gothic_bookregular';
+                outline: none;
+            }
+            input[type=submit] {
+                font-family: 'franklin_gothic_demiregular';
+                background: #E74C3C;
+                border: 0;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img src="/logo.png" />
+            <form action="/show" method="GET">
+                <label>What is credit card number?</label>
+                <input type="text" />
+                <label>Expiration Month</label>
+                <input type="text" />
+                <label>Expiration Year</label>
+                <input type="text" name="organ"/>
+                <input type="submit" value="Process Payment" />
+            </form?
+        </div>
+    </body>
+</html>

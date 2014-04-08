@@ -1,22 +1,75 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>stl viewer</title>
+        <title>Organ Bot</title>
         <meta charset="utf-8">
+        <link href="/fonts.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <style>
+            p {
+                font-size: 20px;
+                margin: 0 0 10px 0;
+                padding: 0
+            }
+            #model {
+                height: 200px;
+            }
+            * {
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+            .container {
+                max-width: 320px;
+                margin: 0 auto;
+            }
             body {
-                font-family: Monospace;
-                background-color: #f0f0f0;
-                margin: 0px;
-                overflow: hidden;
+                background: #ECF0F1;
+                text-align: center;
+                font-family: 'franklin_gothic_demiregular';
+            }
+            img {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            label, input {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            input {
+                padding: 10px;
+                margin-bottom: 20px;
+                height: 50px;
+                -webkit-appearance: none;
+                border: 0;
+                background: white;
+                border-radius: 3px;
+                border: 2px solid #979797;
+                font-family: 'franklin_gothic_bookregular';
+                outline: none;
+            }
+            input[type=submit] {
+                font-family: 'franklin_gothic_demiregular';
+                background: #E74C3C;
+                border: 0;
+                color: white;
             }
         </style>
     </head>
     <body>
-        <script src="three.js"></script>
-        <script src="stats.js"></script>
-        <script src="detector.js"></script>
+        <div class="container">
+            <img src="/logo.png" />
+            <p>We found you a {{name}}!</p>
+            <div id="model"></div>
+            <form action="/buy" method="GET">
+                <input type="submit" value="Buy for $1.5 million" />
+            </form>
+        </div>
+
+        <script src="{{ url_for('static', filename='three.js') }}"></script>
+        <script src="{{ url_for('static', filename='stats.js') }}"></script>
+        <script src="{{ url_for('static', filename='detector.js') }}"></script>
         <script>
 
             var camera, scene, renderer,
@@ -220,7 +273,7 @@
 
                 scene = new THREE.Scene();
 
-                camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+                camera = new THREE.PerspectiveCamera( 75, $("#model").width() / $("#model").height(), 1, 10000 );
                 camera.position.z = 70;
                 camera.position.y = 0;
                 scene.add( camera );
@@ -250,7 +303,7 @@
                     console.log(e);
                 }
                 
-                xhr.open( "GET", 'Octocat-v1.stl', true );
+                xhr.open( "GET", "{{ url_for('static', filename='STLModels/'+model) }}", true );
                 xhr.responseType = "arraybuffer";
                 //xhr.setRequestHeader("Accept","text/plain");
                 //xhr.setRequestHeader("Content-Type","text/plain");
@@ -258,14 +311,14 @@
                 xhr.send( null );
 
                 renderer = new THREE.WebGLRenderer(); //new THREE.CanvasRenderer();
-                renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.setSize( $("#model").width(), $("#model").height() );
 
-                document.body.appendChild( renderer.domElement );
+                $("#model")[0].appendChild( renderer.domElement );
 
                 stats = new Stats();
                 stats.domElement.style.position = 'absolute';
                 stats.domElement.style.top = '0px';
-                document.body.appendChild(stats.domElement);
+                //document.body.appendChild(stats.domElement);
             }
 
             function animate() {
@@ -281,14 +334,13 @@
 
                 //mesh.rotation.x += 0.01;
                 if (mesh) {
-                    mesh.rotation.z += 0.02;
+                    mesh.rotation.z += 0.005;
                 }
                 //light1.position.z -= 1;
 
                 renderer.render( scene, camera );
 
             }
-
         </script>
     </body>
 </html>
