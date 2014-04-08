@@ -8,8 +8,8 @@ class nav:
         self.caption = caption
 
 @app.route('/show')
-def show():
-	return render_template('viewer.html')
+def stl():
+	return render_template('show.html')
 
 @app.route('/')
 def search():
