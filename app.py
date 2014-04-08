@@ -7,9 +7,17 @@ class nav:
         self.href = href
         self.caption = caption
 
-@app.route('/show')
-def stl():
-	return render_template('show.html')
+@app.route('/show/<id>')
+def stl(id=None):
+
+	if (id == '1'):
+		themodel = "eyes.stl"
+	elif(id == '2'):
+		themodel = "legl.stl"
+	else:
+		themodel = "Octocat-v1.stl"
+
+	return render_template('viewer.html', model=themodel)
 
 @app.route('/')
 def search():

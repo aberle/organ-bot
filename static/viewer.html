@@ -3,7 +3,6 @@
     <head>
         <title>stl viewer</title>
         <meta charset="utf-8">
-        <div class="row well well-md col-md-12 ">
         <meta name="viewport" content="width=800, height=800 user-scalable=no, minimum-scale=0.5, maximum-scale=0.5">
         </div>
         <style>
@@ -252,7 +251,7 @@
                     console.log(e);
                 }
                 
-                xhr.open( "GET", 'STLModels/Octocat-v1.stl', true );
+                xhr.open( "GET", 'STLModels/eyes.stl', true );
                 xhr.responseType = "arraybuffer";
                 //xhr.setRequestHeader("Accept","text/plain");
                 //xhr.setRequestHeader("Content-Type","text/plain");
@@ -260,7 +259,7 @@
                 xhr.send( null );
 
                 renderer = new THREE.WebGLRenderer(); //new THREE.CanvasRenderer();
-                renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
+                renderer.setSize( window.innerWidth, window.innerHeight );
 
                 document.body.appendChild( renderer.domElement );
 

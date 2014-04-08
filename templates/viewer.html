@@ -3,20 +3,22 @@
     <head>
         <title>stl viewer</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=800, height=800 user-scalable=no, minimum-scale=0.5, maximum-scale=0.5">
+        </div>
         <style>
             body {
                 font-family: Monospace;
-                background-color: #f0f0f0;
+                background-color: #ffffff;
                 margin: 0px;
                 overflow: hidden;
             }
         </style>
     </head>
     <body>
-        <script src="three.js"></script>
-        <script src="stats.js"></script>
-        <script src="detector.js"></script>
+
+        <script src="{{ url_for('static', filename='three.js') }}"></script>
+        <script src="{{ url_for('static', filename='stats.js') }}"></script>
+        <script src="{{ url_for('static', filename='detector.js') }}"></script>
         <script>
 
             var camera, scene, renderer,
@@ -250,7 +252,7 @@
                     console.log(e);
                 }
                 
-                xhr.open( "GET", 'Octocat-v1.stl', true );
+                xhr.open( "GET", "{{ url_for('static', filename='STLModels/'+model) }}", true );
                 xhr.responseType = "arraybuffer";
                 //xhr.setRequestHeader("Accept","text/plain");
                 //xhr.setRequestHeader("Content-Type","text/plain");
@@ -265,7 +267,7 @@
                 stats = new Stats();
                 stats.domElement.style.position = 'absolute';
                 stats.domElement.style.top = '0px';
-                document.body.appendChild(stats.domElement);
+                //document.body.appendChild(stats.domElement);
             }
 
             function animate() {
@@ -281,7 +283,7 @@
 
                 //mesh.rotation.x += 0.01;
                 if (mesh) {
-                    mesh.rotation.z += 0.02;
+                    mesh.rotation.z += 0.005;
                 }
                 //light1.position.z -= 1;
 
@@ -290,5 +292,6 @@
             }
 
         </script>
+
     </body>
 </html>
